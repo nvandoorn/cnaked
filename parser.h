@@ -3,6 +3,6 @@
 
 #include "game-state.h"
 
-int parser_stringToState(char *reqBody, GameState_t *state);
+int parser_stringToState(char *reqBody, struct GameState_t *state);
 
 #endif

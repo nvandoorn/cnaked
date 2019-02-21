@@ -15,7 +15,7 @@ struct server_Res_t {
 };
 
 typedef void (*server_Callback_t)(struct server_Req_t *req,
-                                  struct server_Res_t *res);
+                                  struct server_Res_t *res, void *ctx);
 
 /**
  * Start the HTTP server
@@ -23,7 +23,7 @@ typedef void (*server_Callback_t)(struct server_Req_t *req,
  * Return a non-zero value on error,
  * error codes to come
  */
-int server_start(server_Ctx_t *ctx);
+int server_start(struct server_Ctx_t *ctx);
 
 /*
  * void myFunction(ServerRequest_t* req, ServerResponse_t* res) {
@@ -31,6 +31,7 @@ int server_start(server_Ctx_t *ctx);
  * }
  * int res = server_attachRouteHandler("/move", myFunction)
  */
-int server_attachRouteHandler(char *route, server_Callback_t handler);
+int server_attachRouteHandler(char *route, server_Callback_t handler,
+                              void *ctx);
 
 #endif
