@@ -9,7 +9,10 @@
  * This structure represents one incoming request.
  * Note that this assumes all algorithms are stateless
  * (in the sense that they have no memory, or maybe it will?)
- * and do not modify this structure
+ * and do not modify this structure.
+ *
+ * This structure should always be populated
+ * by a parser function that transforms string => struct GameState_t
  */
 struct GameState_t {
   // Model us
