@@ -13,7 +13,7 @@
  */
 struct GameState_t {
   // Model us
-  char* gameId;
+  char *gameId;
   int turn;
   int ourHealth;
   // Model our body as a 2d array
