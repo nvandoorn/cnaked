@@ -1,21 +1,21 @@
 #ifndef CNAKE_SERVER_H
 #define CNAKE_SERVER_H
 
-struct ServerContext_t {
+struct server_Ctx_t {
   int port;
 };
 
-struct ServerRequest_t {
-  char* body;
+struct server_Req_t {
+  char *body;
   int status;
 };
 
-struct ServerResponse_t {
-  int (*write)(char* resBody, int status);
+struct server_Res_t {
+  int (*write)(char *resBody, int status);
 };
 
-typedef void (*ServerCallBack_t)(struct ServerRequest_t *req,
-                                 struct ServerResponse_t *res);
+typedef void (*server_Callback_t)(struct server_Req_t *req,
+                                  struct server_Res_t *res);
 
 /**
  * Start the HTTP server
@@ -23,7 +23,7 @@ typedef void (*ServerCallBack_t)(struct ServerRequest_t *req,
  * Return a non-zero value on error,
  * error codes to come
  */
-int server_start(ServerContext_t *ctx);
+int server_start(server_Ctx_t *ctx);
 
 /*
  * void myFunction(ServerRequest_t* req, ServerResponse_t* res) {
@@ -31,6 +31,6 @@ int server_start(ServerContext_t *ctx);
  * }
  * int res = server_attachRouteHandler("/move", myFunction)
  */
-int server_attachRouteHandler(char *route, ServerCallBack_t handler);
+int server_attachRouteHandler(char *route, server_Callback_t handler);
 
 #endif
