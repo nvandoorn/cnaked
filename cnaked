@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if [[ "$OSTYPE" == "win32" ]]; then
+  echo "Sorry not today satan"
+  exit -420
+fi
+
+./main
