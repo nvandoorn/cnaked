@@ -30,11 +30,6 @@ struct GameState_t {
   int body[COORD][MAX_SNAKE_LEN][N_MAX_SNAKES];
 };
 
-enum GameRank_t {
-  AVOID = 0,
-  ALIVE = 1,
-  FED = 2,
-  ELIMINATION = 3
-};
+enum GameRank_t { AVOID = 0, ALIVE, FED, ALPHA_AF };
 
 #endif
