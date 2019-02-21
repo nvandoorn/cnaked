@@ -15,8 +15,6 @@
  * by a parser function that transforms string => struct GameState_t
  */
 struct GameState_t {
-  // Model us
-  char *gameId;
   int turn;
   int ourHealth;
   // Model our body as a 2d array
@@ -32,6 +30,8 @@ struct GameState_t {
   int health[N_MAX_SNAKES];
   int body[COORD][MAX_SNAKE_LEN][N_MAX_SNAKES];
 };
+
+enum GameMove_t { UP, DOWN, LEFT, RIGHT };
 
 enum GameRank_t { AVOID = 0, ALIVE, FED, ALPHA_AF };
 

@@ -5,4 +5,4 @@ if [[ "$OSTYPE" == "win32" ]]; then
   exit -420
 fi
 
-./main
+./main $1
