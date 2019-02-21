@@ -1,9 +1,9 @@
 CC=gcc
 CFLAGS=-I.
-DEPS= parser.h server.h test-lib.h main.h
-OBJ = parser.o server.o test-lib.o main.o
-MAIN_OBJ = 
-TEST_OBJ = main.test.o
+DEPS= parser.h server.h test-lib.h core.h
+OBJ = parser.o server.o test-lib.o core.o
+MAIN_OBJ = main.o
+TEST_OBJ = core.test.o
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
@@ -12,7 +12,7 @@ main: $(OBJ) $(MAIN_OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
 
 test: $(OBJ) $(TEST_OBJ)
-	$(CC) -o $@ $^ $(CFLAGS)
+	$(CC) -o $@ $^ $(CFLAGS) && echo "\n\nRunning Tests\n\n" &&./test
 
 .PHONY: clean
 clean:

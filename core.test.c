@@ -1,5 +1,5 @@
+#include "core.h"
 #include "game-state.h"
-#include "main.h"
 #include "test-lib.h"
 #include <string.h>
 
