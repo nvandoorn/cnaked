@@ -8,6 +8,16 @@
 
 #define DEFAULT_PORT 5000
 
+struct StateNode {
+  struct GameState_t state;
+  // Track the number of connected
+  // nodes
+  int nPossibleStates;
+  // Allocate tons of room for
+  // nodes that could possibly be connected
+  struct GameState_t *possibleStates[1024];
+};
+
 void parseArgs(struct server_Ctx_t *ctx, int argc, char *argv[]) {
   if (argc < 2) {
     printf("Usage: ./cnaked PORT\n");
@@ -22,6 +32,15 @@ void parseArgs(struct server_Ctx_t *ctx, int argc, char *argv[]) {
 // is starting to look kindof shitty
 // (thinking about thread APIs mostly)
 int traverse(struct GameState_t *state, enum GameMove_t *res) {}
+
+// Note, we must apply this to each snake, with each possible turn combo,
+// barring some turns that can be eliminated off the bat.
+// TODO the comment above essentially describes a small
+// "tree shake" (nodes that we don't really need to analyze)
+// but I'm not sure when we should prune it. Maybe as we build
+// the graph to avoid doing it twice?
+int remakeGameState(struct GameState_t *oldState, struct GameState_t *newState,
+                    enum GameMove_t *res) {}
 
 int gameMoveToJson(enum GameMove_t *res, char *buff, int buffSize) {
   char *moveStr;

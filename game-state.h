@@ -4,6 +4,7 @@
 #define COORD 2
 #define MAX_SNAKE_LEN 1024
 #define N_MAX_SNAKES 9
+#define N_MAX_FOOD 100
 
 /**
  * This structure represents one incoming request.
@@ -27,8 +28,11 @@ struct GameState_t {
 
   // Read more here
   // https://stackoverflow.com/questions/8377667/layout-in-memory-of-a-struct-struct-of-arrays-and-array-of-structs-in-c-c
+  int nSnakes;
+  int nFood;
   int health[N_MAX_SNAKES];
   int body[COORD][MAX_SNAKE_LEN][N_MAX_SNAKES];
+  int food[COORD][N_MAX_FOOD];
 };
 
 enum GameMove_t { UP, DOWN, LEFT, RIGHT };

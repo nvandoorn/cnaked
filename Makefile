@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-I.
+CFLAGS=-I. -I./mongoose
 DEPS= parser.h server.h test-lib.h core.h
 OBJ = parser.o server.o test-lib.o core.o
 MAIN_OBJ = main.o

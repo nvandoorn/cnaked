@@ -1,3 +1,4 @@
+#include "mongoose.h"
 #include "server.h"
 
 int server_start(struct server_Ctx_t *ctx) { return 0; }
