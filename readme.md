@@ -11,7 +11,7 @@ Lots of headers, some tests, some coupling, not much implemented.
 1. (hash) Thread safe hash table
 1. (graph) Threaded graph BFS
 1. (server) HTTP server/routing
-1. (parser) Fast "JSON" parser (it could potentially)
+1. (parser) Fast "JSON" parser (it could potentially use magic indices and be super dumb but super fast)
 1. (core) Generate graph based on `POST` request
 1. (core) Tree shaking as the graph is being built (i.e don't add naive moves)
 1. (core) Define thread communication (in particular, how does it pass back it's result?)
