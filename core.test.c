@@ -1,5 +1,6 @@
 #include "core.h"
 #include "game-state.h"
+#include "graph.test.h"
 #include "test-lib.h"
 #include <string.h>
 
@@ -13,4 +14,5 @@ int testMoveToJson() {
 
 int main() {
   syncTest("gameMoveToJson", "JSON payload is incorrect", testMoveToJson);
+  graph_test();
 }

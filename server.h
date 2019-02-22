@@ -1,6 +1,8 @@
 #ifndef CNAKE_SERVER_H
 #define CNAKE_SERVER_H
 
+#define HTTP_OK 200
+
 struct server_Ctx_t {
   int port;
 };

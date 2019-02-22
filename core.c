@@ -31,7 +31,7 @@ void parseArgs(struct server_Ctx_t *ctx, int argc, char *argv[]) {
 // should pass back the move... but a pointer
 // is starting to look kindof shitty
 // (thinking about thread APIs mostly)
-int traverse(struct GameState_t *state, enum GameMove_t *res) {}
+int traverse(struct GameState_t *state, enum GameMove_t *res) { return -1; }
 
 // Note, we must apply this to each snake, with each possible turn combo,
 // barring some turns that can be eliminated off the bat.
@@ -40,7 +40,9 @@ int traverse(struct GameState_t *state, enum GameMove_t *res) {}
 // but I'm not sure when we should prune it. Maybe as we build
 // the graph to avoid doing it twice?
 int remakeGameState(struct GameState_t *oldState, struct GameState_t *newState,
-                    enum GameMove_t *res) {}
+                    enum GameMove_t *res) {
+  return -1;
+}
 
 int gameMoveToJson(enum GameMove_t *res, char *buff, int buffSize) {
   char *moveStr;
@@ -65,6 +67,7 @@ int gameMoveToJson(enum GameMove_t *res, char *buff, int buffSize) {
 
 void moveHandler(struct server_Req_t *req, struct server_Res_t *res,
                  void *ctx) {
+  char buff[300];
   enum GameMove_t move;
   // Allocate space for the very first node
   struct GameState_t *state = malloc(sizeof(struct GameState_t));
@@ -74,7 +77,14 @@ void moveHandler(struct server_Req_t *req, struct server_Res_t *res,
   // Recursively traverse from here.
   // Please see comment on traverse routine
   int traverseRes = traverse(state, &move);
+  int jsonRes = gameMoveToJson(&move, buff, 300);
+  res->write(buff, HTTP_OK);
   free(state);
+}
+
+void startHandler(struct server_Req_t *req, struct server_Res_t *res,
+                  void *ctx) {
+  res->write("{}", HTTP_OK);
 }
 
 int core_setup(int argc, char *argv[]) {
@@ -82,5 +92,6 @@ int core_setup(int argc, char *argv[]) {
   parseArgs(&ctx, argc, argv);
   server_start(&ctx);
   server_attachRouteHandler("move", moveHandler, NULL);
+  server_attachRouteHandler("start", startHandler, NULL);
   return 0;
 }
