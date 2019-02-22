@@ -16,7 +16,7 @@ int makeGraphEmptyNode() {
 int makeGraphSuccess() {
   struct graph_Graph_t g;
   int val = 5;
-  struct graph_Node_t n = {.value = &val, .maxNEdges = 1024};
+  struct graph_Node_t n = {.value = &val, .maxNArcs = 1024};
   return graph_makeGraph(&g, &n) != 0;
 }
 
@@ -24,7 +24,7 @@ int insertNodeNullDeref() {
   struct graph_Graph_t g;
   double val = 6;
   struct graph_Node_t *arcsN[1024];
-  struct graph_Node_t n = {.value = &val, .maxNEdges = 1024, .arcs = arcsN};
+  struct graph_Node_t n = {.value = &val, .maxNArcs = 1024, .arcs = arcsN};
   graph_makeGraph(&g, &n);
   return graph_insertNode(&g, &n, NULL) != NULL_GRAPH_DEREF;
 }
@@ -33,7 +33,7 @@ int insertNodeEmptyNode() {
   struct graph_Graph_t g;
   double val = 7;
   struct graph_Node_t *arcsN[1024];
-  struct graph_Node_t n = {.value = &val, .maxNEdges = 1024, .arcs = arcsN};
+  struct graph_Node_t n = {.value = &val, .maxNArcs = 1024, .arcs = arcsN};
   struct graph_Node_t m = {.value = NULL};
   graph_makeGraph(&g, &n);
   return graph_insertNode(&g, &m, &n) != EMPTY_NODE_ERR;
@@ -43,9 +43,9 @@ int insertNodeOutOfMem() {
   struct graph_Graph_t g;
   double val = 8;
   struct graph_Node_t *arcsM[1024];
-  struct graph_Node_t m = {.value = &val, .maxNEdges = 1024, .arcs = arcsM};
+  struct graph_Node_t m = {.value = &val, .maxNArcs = 1024, .arcs = arcsM};
   struct graph_Node_t n = {
-      .value = &val, .maxNEdges = 0, .arcs = NULL, .nArcs = 0};
+      .value = &val, .maxNArcs = 0, .arcs = NULL, .nArcs = 0};
   graph_makeGraph(&g, &n);
   return graph_insertNode(&g, &m, &n) != NODE_OUT_OF_MEM;
 }
@@ -55,9 +55,9 @@ int insertNodeSuccess() {
   double val = 9;
   struct graph_Node_t *arcsN[1024], *arcsM[1024];
   struct graph_Node_t m = {
-      .value = &val, .maxNEdges = 1024, .arcs = arcsM, .nArcs = 0};
+      .value = &val, .maxNArcs = 1024, .arcs = arcsM, .nArcs = 0};
   struct graph_Node_t n = {
-      .value = &val, .maxNEdges = 1024, .arcs = arcsN, .nArcs = 0};
+      .value = &val, .maxNArcs = 1024, .arcs = arcsN, .nArcs = 0};
   graph_makeGraph(&g, &n);
   return graph_insertNode(&g, &m, &n) != 0;
 }

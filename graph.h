@@ -9,7 +9,7 @@ struct graph_Node_t {
   int id;
   void *value; // point to anything and live on the edge
   int nArcs;
-  int maxNEdges;
+  int maxNArcs;
   struct graph_Node_t **arcs;
 };
 

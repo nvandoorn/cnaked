@@ -22,7 +22,7 @@ int graph_insertNode(struct graph_Graph_t *g, struct graph_Node_t *toInsert,
     return NULL_GRAPH_DEREF;
   if (toInsert->value == NULL)
     return EMPTY_NODE_ERR;
-  if (toConnect->nArcs + 1 > toConnect->maxNEdges)
+  if (toConnect->nArcs + 1 > toConnect->maxNArcs)
     return NODE_OUT_OF_MEM;
 
   toInsert->id = id++;
