@@ -1,3 +1,5 @@
 main
 test
 *.o
+node_modules
+test-bin
