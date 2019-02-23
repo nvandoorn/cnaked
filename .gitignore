@@ -3,3 +3,4 @@ test
 *.o
 node_modules
 test-bin
+.DS_Store
