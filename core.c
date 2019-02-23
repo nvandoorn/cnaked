@@ -8,6 +8,10 @@
 
 #define DEFAULT_PORT 5000
 
+const static char *HEAD_TYPE = "bendr";
+const static char *TAIL_TYPE = "pixel";
+const static char *SNAKE_COLOUR = "#ff00ff";
+
 struct StateNode {
   struct GameState_t state;
   // Track the number of connected
@@ -23,8 +27,7 @@ void parseArgs(struct server_Ctx_t *ctx, int argc, char *argv[]) {
     printf("Usage: ./cnaked PORT\n");
     exit(1);
   }
-  int port = atoi(argv[0]);
-  ctx->port = port == 0 ? DEFAULT_PORT : port;
+  ctx->port = argv[0];
 }
 
 // TODO I have no idea how this function
@@ -44,10 +47,10 @@ int remakeGameState(struct GameState_t *oldState, struct GameState_t *newState,
   return -1;
 }
 
-int gameMoveToJson(enum GameMove_t *res, char *buff, int buffSize) {
+int gameMoveToJson(enum GameMove_t *move, char *buff, int buffSize) {
   char *moveStr;
   // save a byte, pass a pointer
-  switch ((*res)) {
+  switch ((*move)) {
   case UP:
     moveStr = "up";
     break;
@@ -63,6 +66,12 @@ int gameMoveToJson(enum GameMove_t *res, char *buff, int buffSize) {
     break;
   }
   return snprintf(buff, buffSize, "{\"move\":\"%s\"}", moveStr);
+}
+
+int startJson(char *buff, int buffSize) {
+  return snprintf(buff, 1024,
+                  "{\"color\":\"%s\",\"headType\":\"%s\",\"tailType\":\"%s\"}",
+                  SNAKE_COLOUR, HEAD_TYPE, TAIL_TYPE);
 }
 
 void moveHandler(struct server_Req_t *req, struct server_Res_t *res,
@@ -84,7 +93,12 @@ void moveHandler(struct server_Req_t *req, struct server_Res_t *res,
 
 void startHandler(struct server_Req_t *req, struct server_Res_t *res,
                   void *ctx) {
-  res->write("{}", HTTP_OK);
+  char buff[1024];
+  int r = startJson(buff, 1024);
+  if (r)
+    res->write("Ya blew it", HTTP_INTERNAL_SERVER_ERR);
+  else
+    res->write(buff, HTTP_OK);
 }
 
 int core_setup(int argc, char *argv[]) {

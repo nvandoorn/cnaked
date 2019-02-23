@@ -2,9 +2,10 @@
 #define CNAKE_SERVER_H
 
 #define HTTP_OK 200
+#define HTTP_INTERNAL_SERVER_ERR 500
 
 struct server_Ctx_t {
-  int port;
+  char *port;
 };
 
 struct server_Req_t {
