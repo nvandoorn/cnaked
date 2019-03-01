@@ -6,6 +6,20 @@ A snake that's so close to the metal that some say 6 CVEs have been opened since
 
 Lots of headers, some tests, some coupling, not much implemented.
 
+### Journal
+
+#### 2am Saturday Feb 23
+
+Ahhh yes, that part of the project where you see the promise but also the headaches. The parser is going OK assuming I can get cJSON to compile properly (dick around with cmake). After that I should implement the HTTP layer. Those should both be relatively straight forward to implement. After that I need to figure out why the hash table isnt so thread safe despite using a mutex to lock it. Finally, figure out how implement a threaded BFS.
+
+Assuming I can figure out and test all of the "internals" listed above, that still leaves the actual algorithm that pieces all of these things together. I think it should go like this.
+
+1. Transform the HTTP request into a complete `struct GameState_t` (core -> http -> parser -> core)
+1. Build the graph of all moves reachable from the current state. (core -> graph -> hash).
+1. Recurse on this graph as deeply as possible using a breadth first search (as implemented by the graph module). This traversal should be threaded if possible, and each thread should stop recursing if the path is deemed undesirable.
+1. All paths that are desirable recurse infinitely, stopping only for a timeout.
+1. These paths should be tracked somehow to avoid running a path finder after the fact.
+
 ### To Be Implemented
 
 1. (hash) Thread safe hash table

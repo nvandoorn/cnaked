@@ -2,6 +2,7 @@
 #include "game-state.h"
 #include "graph.test.h"
 #include "hash-table.test.h"
+#include "parser.test.h"
 #include "test-lib.h"
 #include <string.h>
 
@@ -22,4 +23,6 @@ int main() {
   graph_test();
   // hash-table.test.c
   hash_test();
+  // parser.test.c
+  parser_test();
 }

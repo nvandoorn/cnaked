@@ -141,6 +141,7 @@ void *hailMary_handler(void *ctx) {
   for (int i = 0; i < 100000; i++) {
     r = hash_insert(t, i);
   }
+  return NULL;
 }
 
 int hailMary() {
@@ -155,7 +156,6 @@ int hailMary() {
   if (r)
     return r;
   r = pthread_join(thread, NULL);
-  printf("%d\n", t.nNodes);
   if (r)
     return r;
   for (int i = 0; i < 100000; i++) {
@@ -163,6 +163,7 @@ int hailMary() {
     if (r)
       return r;
   }
+  return 0;
 }
 
 int hash_test() {
@@ -179,4 +180,5 @@ int hash_test() {
   syncTest("hash_insert dupe", "Hash insert did not return correct error",
            hashInsertDupe);
   syncTest("Hail Mary", "Not shocking", hailMary);
+  return 0;
 }

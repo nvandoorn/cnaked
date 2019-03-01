@@ -1,5 +1,6 @@
 #include "hash-table.h"
 #include <pthread.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 int computeHashIndex(int key) {

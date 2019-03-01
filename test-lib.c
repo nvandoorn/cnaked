@@ -3,7 +3,6 @@
 
 static const char *GREEN = "\033[0;32m";
 static const char *RED = "\033[0;31m";
-static const char *WHITE = "\033[1;37m";
 static const char *ESCAPE = "\e[0m";
 
 static void printPass() { printf("%s\tPassed\t\n%s", GREEN, ESCAPE); }
@@ -23,7 +22,7 @@ int syncTest(char *testName, char *errMsg, int (*testCallback)()) {
   return r;
 }
 
-int asyncTest(char *testName, asyncTestHandler_t callback) {
+void asyncTest(char *testName, asyncTestHandler_t callback) {
   printf("Running %s\n", testName);
   callback(printPass, printFail);
 }

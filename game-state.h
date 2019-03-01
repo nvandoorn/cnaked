@@ -5,6 +5,7 @@
 #define MAX_SNAKE_LEN 1024
 #define N_MAX_SNAKES 9
 #define N_MAX_FOOD 100
+#define MAX_ID_SIZE 512
 
 /**
  * This structure represents one incoming request.
@@ -14,12 +15,20 @@
  *
  * This structure should always be populated
  * by a parser function that transforms string => struct GameState_t
+ *
+ * Note that we do not include ourself in the body array
+ * or the nSkakes count
  */
 struct GameState_t {
+  int width;
+  int height;
+
   int turn;
   int ourHealth;
   // Model our body as a 2d array
   int ourBody[COORD][MAX_SNAKE_LEN];
+  int ourBodyLen;
+  char ourId[MAX_ID_SIZE];
 
   // Note that we specifically opt
   // for a "struct of arrays" over
@@ -32,6 +41,7 @@ struct GameState_t {
   int nFood;
   int health[N_MAX_SNAKES];
   int body[COORD][MAX_SNAKE_LEN][N_MAX_SNAKES];
+  int snakeLens[N_MAX_SNAKES];
   int food[COORD][N_MAX_FOOD];
 };
 
