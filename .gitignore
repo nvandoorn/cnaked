@@ -3,4 +3,5 @@ test
 *.o
 node_modules
 test-bin
+cnaked-test-bin
 .DS_Store
